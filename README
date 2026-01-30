@@ -30,7 +30,7 @@ O foco é mostrar **entendimento de processos**, **capacidade de integração en
 
 ### Fluxo de aprovação no BPM (Fluig)
 
-1. Usuário registra ou aprova o pedido no Fluig.  
+1. Usuário registra o pedido no Fluig.  
 2. O BPM realiza validações básicas de regras de negócio.  
 3. Caso haja inconsistências, o pedido retorna para o solicitante ajustar.  
 4. Se válido, o pedido segue para o aprovador.  

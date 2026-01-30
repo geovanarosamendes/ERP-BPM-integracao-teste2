@@ -1,0 +1,84 @@
+# Integração BPM (Fluig) <-> ERP (Protheus) – Fluxo de Aprovação de Pedidos
+
+## 1️⃣ Objetivo
+
+Este repositório apresenta um exemplo conceitual de integração entre um **BPM (Fluig)** e um **ERP (Protheus)**. O objetivo é demonstrar:
+
+- Fluxo de aprovação de pedidos no BPM  
+- Integração técnica com o ERP  
+- Exemplos de rotina ADVPL e consulta SQL  
+- Organização de documentação e fluxogramas  
+
+O foco é mostrar **entendimento de processos**, **capacidade de integração entre sistemas** e **clareza na documentação**, conforme solicitado no teste.
+
+---
+## 2️⃣ Estrutura do repositório
+
+├─ doc/
+│ └─ Resumo_Fluig_Protheus.pdf # Documento explicativo completo
+├─ fluxogramas/
+│ ├─ Fluxo_Aprovacao_BPM.pdf # Fluxograma de aprovação no Fluig
+│ └─ Fluxo_Integracao_BPM_ERP.pdf # Fluxograma de integração Fluig → Protheus
+├─ sql/
+│ └─ ExemploConsulta.sql # Exemplo de consulta SQL no Protheus
+└─ advpl/
+└─ ExemploMVC.prw # Exemplo de rotina ADVPL
+
+--- 
+
+## 3️⃣ Descrição do fluxo
+
+### Fluxo de aprovação no BPM (Fluig)
+
+1. Usuário registra ou aprova o pedido no Fluig.  
+2. O BPM realiza validações básicas de regras de negócio.  
+3. Caso haja inconsistências, o pedido retorna para o solicitante ajustar.  
+4. Se válido, o pedido segue para o aprovador.  
+5. O aprovador decide:
+   - **Reprovado:** pedido vai para histórico como reprovado.  
+   - **Aprovado:** dispara integração com o ERP e finaliza o fluxo no BPM.
+
+> O fluxograma detalhado deste fluxo está disponível em 
+[Fluxo de Aprovação BPM](fluxogramas/Fluxo_Aprovacao_BPM.pdf)
+
+---
+
+### Integração BPM <-> ERP (Fluig → Protheus)
+
+- O Fluig envia uma requisição HTTP para o Protheus usando **API / WebService**.  
+- O **payload** contém os dados do pedido e informações da aprovação (JSON para REST ou XML para SOAP).  
+- O Protheus valida a requisição (autenticação, formato, consistência) e processa a aprovação via **rotinas ADVPL**, atualizando o status do pedido e registrando a aprovação no histórico.  
+- O ERP retorna uma resposta ao Fluig, que finaliza o fluxo ou trata erros.  
+
+> O fluxograma detalhado da integração está em 
+[Fluxo de Integração BPM → ERP](fluxogramas/Fluxo_Integracao_BPM_ERP.pdf)
+
+---
+
+## 4️⃣ Arquivos de exemplo
+
+### ADVPL
+
+- `advpl/ExemploMVC.prw`  
+- Contém um exemplo conceitual de rotina ADVPL, mostrando como o ERP processa dados e interage com a interface (Browse).  
+- O objetivo é ilustrar a lógica do Protheus e o conceito de MVC aplicado ao ERP.
+
+### SQL
+
+- `sql/ConsultaPedidosAprovados.sql`  
+- Exemplo de consulta para obter pedidos aprovados que ainda não foram integrados ao BPM, incluindo cliente, itens e valor total.  
+- Mostra como os dados do ERP podem ser extraídos para integração ou análise.
+
+
+## 5️⃣ Documento explicativo
+
+- [`doc/Resumo_Fluig_Protheus.pdf`](doc/Resumo_Fluig_Protheus.pdf)  
+- Este PDF funciona como um **resumo detalhado do teste**, trazendo minhas pesquisas e análises sobre os sistemas Fluig e Protheus.  
+- Contém:  
+  - **Introdução aos sistemas Fluig e Protheus**: conceitos e uso no dia a dia  
+  - **Fluxo de aprovação BPM**: detalhamento passo a passo  
+  - **Integração BPM ↔ ERP**: explicação conceitual de comunicação e atualização de status  
+  - **Explicação conceitual sobre ADVPL
+
+  > O PDF complementa este README, oferecendo mais contexto e detalhes sobre os fluxos, exemplos e conceitos apresentados no repositório.
+
